@@ -14,8 +14,8 @@ fn (mut f Flag) is_value() bool {
 
 fn (mut f Flag) is_valid(arg Arg) bool {
 	if f.is_value() {
-		short_sub := f.short.substr(0, f.short.index_any(" "))
-		long_sub := f.long.substr(0, f.long.index_any(" "))
+		short_sub := if f.short != "" { f.short.substr(0, f.short.index_any(" ")) } else { f.short }
+		long_sub := if f.long != "" { f.long.substr(0, f.long.index_any(" ")) } else { f.long }
 
 		return short_sub == arg.origin[arg.position] || long_sub == arg.origin[arg.position]
 	}
