@@ -63,3 +63,7 @@ pub fn (mut o OptionParser) help_str() string {
 	}
 	return result
 }
+
+pub fn (mut o OptionParser) have_arguments() bool {
+	return o.args.len > 1
+}
