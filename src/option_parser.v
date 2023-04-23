@@ -5,7 +5,7 @@ import os
 pub struct Indentation {
 pub mut:
 	left   int = 4
-	middle int = 33
+	middle int = 34
 }
 
 pub struct OptionParser {
@@ -58,7 +58,13 @@ pub fn (mut o OptionParser) help_str() string {
 		flag_l := if flag.long == "" { "" } else { ", $flag.long" }
 		flags_str := " ".repeat(o.indentation.left) + "$flag.short$flag_l"
 		desc := flag.description.replace("\n", "\n" + " ".repeat(o.indentation.middle))
-		flag_row := "$flags_str${' '.repeat(o.indentation.middle - flags_str.len)}$desc\n"
+		
+		mut tail_length := o.indentation.middle - flags_str.len
+		if tail_length <= 0 {
+			tail_length = 2
+		}
+
+		flag_row := "$flags_str${' '.repeat(tail_length)}$desc\n"
 		result += flag_row
 	}
 	return result
