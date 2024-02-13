@@ -5,7 +5,7 @@ mut:
 	short 		string
 	long 		string
 	description string
-	block 		fn(string)
+	block 		fn(string) = unsafe { nil }
 }
 
 fn (mut f Flag) is_value() bool {
